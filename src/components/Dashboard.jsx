@@ -4,23 +4,28 @@ import { Grid, Paper, Typography, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 function Dashboard() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Replace with your API URL and key
         const response = await axios.get(
-          'http://api.openweathermap.org/data/2.5/weather?q=Zurich,CH&appid=6cf4c0e92a0fbc2c27dd98c2d19120d9&units=metric'
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6cf4c0e92a0fbc2c27dd98c2d19120d9&units=metric`
         );
-        setWeatherData(response.data);
+        setWeather(response.data);
       } catch (error) {
         console.error('Error fetching weather data', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [city]);
+
+  const handleSearchBarOnChange = (event) => {
+    setCity(event.target.value);
+  };
 
   // Function to format date and time
   const formatDate = (timestamp) => {
@@ -56,6 +61,8 @@ function Dashboard() {
           >
             <InputBase
               sx={{ ml: 1, flex: 1 }}
+              value={city}
+              onChange={handleSearchBarOnChange}
               placeholder='Search location'
               inputProps={{ 'aria-label': 'search location' }}
             />
@@ -65,28 +72,28 @@ function Dashboard() {
           </Paper>
 
           {/* ... existing content ... */}
-          {weatherData && (
+          {weather && (
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={6}>
                 <Typography variant='h3' component='h3'>
-                  {weatherData.name}
+                  {weather.name}
                 </Typography>
                 <Typography variant='h4' component='h4'>
-                  {formatDate(weatherData.dt)}
+                  {formatDate(weather.dt)}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                  {formatTime(weatherData.dt)}
+                  {formatTime(weather.dt)}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
-                  {weatherData.main.temp.toFixed(1)}°C
+                  {weather.main.temp.toFixed(1)}°C
                 </Typography>
                 <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                  {weatherData.main.temp_min.toFixed(1)}°C / {weatherData.main.temp_max.toFixed(1)}
-                  °C - {isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt)}
+                  {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}
+                  °C - {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
                 </Typography>
               </Grid>
               {/* ... add more content as needed ... */}
