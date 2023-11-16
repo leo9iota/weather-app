@@ -1,7 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Grid, Paper, Typography, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 function Dashboard() {
+  const [weatherData, setWeatherData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Replace with your API URL and key
+        const response = await axios.get(
+          'http://api.openweathermap.org/data/2.5/weather?q=Zurich,CH&appid=6cf4c0e92a0fbc2c27dd98c2d19120d9&units=metric'
+        );
+        setWeatherData(response.data);
+      } catch (error) {
+        console.error('Error fetching weather data', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Function to format date and time
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const isDayTime = (sunrise, sunset, currentTime) => {
+    return currentTime >= sunrise && currentTime < sunset ? 'Day' : 'Evening';
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
@@ -21,33 +64,34 @@ function Dashboard() {
             </IconButton>
           </Paper>
 
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={6}>
-              {/* Content for the left large card with weather information */}
-              <Typography variant='h3' component='h3'>
-                Zurich, Dübendorf
-              </Typography>
-              <Typography variant='h4' component='h4'>
-                8. August 2023
-              </Typography>
+          {/* ... existing content ... */}
+          {weatherData && (
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid item xs={6}>
+                <Typography variant='h3' component='h3'>
+                  {weatherData.name}
+                </Typography>
+                <Typography variant='h4' component='h4'>
+                  {formatDate(weatherData.dt)}
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
+                  {formatTime(weatherData.dt)}
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
+                  {weatherData.main.temp.toFixed(1)}°C
+                </Typography>
+                <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
+                  {weatherData.main.temp_min.toFixed(1)}°C / {weatherData.main.temp_max.toFixed(1)}
+                  °C - {isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt)}
+                </Typography>
+              </Grid>
+              {/* ... add more content as needed ... */}
             </Grid>
-            <Grid item xs={6}>
-              <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                13:30
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
-                12°C
-              </Typography>
-              <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                12°C / 14°C - Day
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              Icon
-            </Grid>
-          </Grid>
+          )}
           {/* Other weather information here */}
         </Paper>
       </Grid>
