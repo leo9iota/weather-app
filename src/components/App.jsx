@@ -1,10 +1,10 @@
-import { darkTheme } from '../theme/Dark';
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { lightTheme } from '../theme/Light';
+import { ThemeProvider } from '@mui/material';
 import Dashboard from './Dashboard';
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <Dashboard />
     </ThemeProvider>
   );
