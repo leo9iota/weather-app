@@ -21,13 +21,33 @@ function Dashboard() {
             </IconButton>
           </Paper>
 
-          {/* Content for the left large card with weather information */}
-          <Typography variant='h4' component='h1'>
-            Zurich, Dübendorf
-          </Typography>
-          <Typography variant='h2' component='h2' sx={{ fontWeight: 'medium' }}>
-            12°C
-          </Typography>
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={6}>
+              {/* Content for the left large card with weather information */}
+              <Typography variant='h3' component='h3'>
+                Zurich, Dübendorf
+              </Typography>
+              <Typography variant='h4' component='h4'>
+                8. August 2023
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
+                13:30
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
+                12°C
+              </Typography>
+              <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
+                12°C / 14°C - Day
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              Icon
+            </Grid>
+          </Grid>
           {/* Other weather information here */}
         </Paper>
       </Grid>
