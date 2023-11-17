@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { Grid, Paper } from '@mui/material';
 import axios from 'axios';
-import { Grid, Paper, Typography, InputBase, IconButton } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+
+import SearchBar from './SearchBar';
+import WeatherDisplay from './WeatherDisplay';
+import Overview from './Overview';
+import Forecast from './Forecast';
 
 function Dashboard() {
   const [weather, setWeather] = useState(null);
@@ -50,75 +54,23 @@ function Dashboard() {
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
-          {/* Search component */}
-          <Paper
-            component='form'
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', marginBottom: 2 }}
-            onSubmit={(event) => {
-              event.preventDefault(); // Prevent default form submission
-              handleSearch(); // Execute search when form is submitted
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              value={city}
-              onChange={handleSearchBarOnChange}
-              placeholder='Search location'
-              inputProps={{ 'aria-label': 'search location' }}
-            />
-            <IconButton type='submit' sx={{ p: '10px' }} aria-label='search'>
-              <SearchIcon />
-            </IconButton>
-          </Paper>
-
-          {/* Weather info component */}
+          <SearchBar city={city} onCityChange={handleSearchBarOnChange} onSearch={handleSearch} />
           {weather && (
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={6}>
-                <Typography variant='h3' component='h3'>
-                  {weather.name}
-                </Typography>
-                <Typography variant='h4' component='h4'>
-                  {formatDate(weather.dt)}
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                  {formatTime(weather.dt)}
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
-                  {weather.main.temp.toFixed(1)}°C
-                </Typography>
-                <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-                  {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}
-                  °C - {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
-                </Typography>
-              </Grid>
-            </Grid>
+            <WeatherDisplay
+              weather={weather}
+              formatDate={formatDate}
+              formatTime={formatTime}
+              isDayTime={isDayTime}
+            />
           )}
-          {/* Other weather information */}
         </Paper>
       </Grid>
       <Grid item xs={6} container spacing={2}>
         <Grid item xs={12}>
-          <Paper elevation={3} sx={{ height: '60%', padding: 2 }}>
-            {/* Content for the right top card */}
-            <Typography variant='h6' component='h2'>
-              Overview
-            </Typography>
-            {/* Other details here */}
-          </Paper>
+          <Overview />
         </Grid>
         <Grid item xs={12}>
-          <Paper elevation={3} sx={{ height: '40%', padding: 2 }}>
-            {/* Content for the right bottom card */}
-            <Typography variant='h6' component='h2'>
-              Weather Forecast
-            </Typography>
-            {/* Forecast details here */}
-          </Paper>
+          <Forecast />
         </Grid>
       </Grid>
     </Grid>
