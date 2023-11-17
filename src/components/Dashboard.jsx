@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Grid, Paper, Typography, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,21 +7,17 @@ function Dashboard() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Replace with your API URL and key
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6cf4c0e92a0fbc2c27dd98c2d19120d9&units=metric`
-        );
-        setWeather(response.data);
-      } catch (error) {
-        console.error('Error fetching weather data', error);
-      }
-    };
-
-    fetchData();
-  }, [city]);
+  // Function to handle the search action
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6cf4c0e92a0fbc2c27dd98c2d19120d9&units=metric`
+      );
+      setWeather(response.data);
+    } catch (error) {
+      console.error('Error fetching weather data', error);
+    }
+  };
 
   const handleSearchBarOnChange = (event) => {
     setCity(event.target.value);
@@ -54,10 +50,14 @@ function Dashboard() {
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
-          {/* Search Component */}
+          {/* Search component */}
           <Paper
             component='form'
             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', marginBottom: 2 }}
+            onSubmit={(e) => {
+              e.preventDefault(); // Prevent default form submission
+              handleSearch(); // Execute search when form is submitted
+            }}
           >
             <InputBase
               sx={{ ml: 1, flex: 1 }}
@@ -71,7 +71,7 @@ function Dashboard() {
             </IconButton>
           </Paper>
 
-          {/* ... existing content ... */}
+          {/* Weather info component */}
           {weather && (
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={6}>
@@ -96,10 +96,9 @@ function Dashboard() {
                   °C - {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
                 </Typography>
               </Grid>
-              {/* ... add more content as needed ... */}
             </Grid>
           )}
-          {/* Other weather information here */}
+          {/* Other weather information */}
         </Paper>
       </Grid>
       <Grid item xs={6} container spacing={2}>
