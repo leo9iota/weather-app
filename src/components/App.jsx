@@ -1,3 +1,4 @@
+// App.jsx
 import { ThemeProvider } from '@mui/material';
 import Dashboard from './Dashboard';
 import { darkTheme } from '../theme/DarkTheme';
