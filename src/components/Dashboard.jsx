@@ -54,8 +54,8 @@ function Dashboard() {
           <Paper
             component='form'
             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', marginBottom: 2 }}
-            onSubmit={(e) => {
-              e.preventDefault(); // Prevent default form submission
+            onSubmit={(event) => {
+              event.preventDefault(); // Prevent default form submission
               handleSearch(); // Execute search when form is submitted
             }}
           >
