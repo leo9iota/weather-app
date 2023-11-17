@@ -12,9 +12,10 @@ import Forecast from './Forecast';
 function Dashboard({ onToggleTheme }) {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
-  
+
   // Access the API key safely through environment variables
-  const apiKey = process.env.REACT_APP_API_KEY;
+  // const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+  const apiKey = '9308bf1b53ae61108fe9c912a6e647d5';
 
   // Function to handle the search action
   const handleSearch = async () => {
