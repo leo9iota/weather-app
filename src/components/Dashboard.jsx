@@ -1,6 +1,6 @@
 // Dashboard.jsx
 import React, { useState } from 'react';
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Box } from '@mui/material';
 import axios from 'axios';
 import NavBar from './NavBar';
 import SearchBar from './SearchBar';
@@ -12,7 +12,9 @@ import Forecast from './Forecast';
 function Dashboard({ onToggleTheme }) {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
-  const apiKey = '6cf4c0e92a0fbc2c27dd98c2d19120d9'
+  
+  // Access the API key safely through environment variables
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   // Function to handle the search action
   const handleSearch = async () => {
@@ -56,29 +58,35 @@ function Dashboard({ onToggleTheme }) {
   return (
     <>
       <NavBar />
-      <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
-          <SearchBar city={city} onCityChange={handleSearchBarOnChange} onSearch={handleSearch} />
-          {weather && (
-            <WeatherDisplay
-              weather={weather}
-              formatDate={formatDate}
-              formatTime={formatTime}
-              isDayTime={isDayTime}
-            />
-          )}
-        </Paper>
-      </Grid>
-      <Grid item xs={6} container spacing={2}>
-        <Grid item xs={12}>
-          <Overview />
+      <Box sx={{ mt: 2 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
+              <SearchBar
+                city={city}
+                onCityChange={handleSearchBarOnChange}
+                onSearch={handleSearch}
+              />
+              {weather && (
+                <WeatherDisplay
+                  weather={weather}
+                  formatDate={formatDate}
+                  formatTime={formatTime}
+                  isDayTime={isDayTime}
+                />
+              )}
+            </Paper>
+          </Grid>
+          <Grid item xs={6} container spacing={2}>
+            <Grid item xs={12}>
+              <Overview />
+            </Grid>
+            <Grid item xs={12}>
+              <Forecast />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Forecast />
-        </Grid>
-      </Grid>
-    </Grid>
+      </Box>
     </>
   );
 }
