@@ -8,8 +8,8 @@ function SearchBar({ city, onCityChange, onSearch }) {
     <Paper
       component='form'
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', marginBottom: 2 }}
-      onSubmit={(e) => {
-        e.preventDefault();
+      onSubmit={(event) => {
+        event.preventDefault();
         onSearch();
       }}
     >
