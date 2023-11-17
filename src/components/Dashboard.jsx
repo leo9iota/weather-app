@@ -18,15 +18,18 @@ function Dashboard({ onToggleTheme }) {
   const apiKey = '9308bf1b53ae61108fe9c912a6e647d5';
 
   // Function to handle the search action
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-      );
-      setWeather(response.data);
-    } catch (error) {
-      console.error('Error fetching weather data', error);
-    }
+  const handleSearch = () => {
+    axios
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+      .then((response) => {
+        setWeather(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching weather data', error);
+      })
+      .finally(() => {
+        // Any cleanup actions if needed
+      });
   };
 
   const handleSearchBarOnChange = (event) => {
