@@ -1,14 +1,17 @@
-import { ThemeProvider, CssBaseline } from '@mui/material';
+// App.js
+import React from 'react';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ThemeProviderWrapper } from './ThemeContext'; // adjust the import path
 import Dashboard from './Dashboard';
-import { darkTheme } from '../themes/DarkTheme';
-// import { lightTheme } from '../themes/LightTheme';
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Dashboard />
-    </ThemeProvider>
+    <ThemeProviderWrapper>
+      <ThemeProvider theme={theme.muiTheme}>
+        <CssBaseline />
+        <Dashboard />
+      </ThemeProvider>
+    </ThemeProviderWrapper>
   );
 }
 
