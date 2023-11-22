@@ -65,7 +65,7 @@ function Dashboard() {
 
           {/* Overview */}
           <Grid item xs={12} md={6}>
-            <Paper elevation={3} sx={{ padding: 2, mx: 2 }}>
+            <Paper elevation={3} sx={{ padding: 0, mx: 2 }}>
               {' '}
               {/* Margin X applied */}
               <Overview weatherData={weatherData} />
@@ -74,7 +74,7 @@ function Dashboard() {
 
           {/* Forecast */}
           <Grid item xs={12}>
-            <Paper elevation={3} sx={{ padding: 2, mx: 2 }}>
+            <Paper elevation={3} sx={{ padding: 0, mx: 2 }}>
               {' '}
               {/* Margin X applied */}
               <Forecast forecastData={forecastData} />
