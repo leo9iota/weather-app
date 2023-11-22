@@ -35,10 +35,9 @@ function WeatherDisplay({ weather }) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        borderRadius: '4px', // Adjust as needed for rounded corners
-        overflow: 'hidden', // Ensures the background respects the border radius
-        // Ensure the component takes full width of its container, similar to Overview
-        width: '100%',
+        borderRadius: '4px', // Rounded corners
+        overflow: 'hidden', // Ensures the background adheres to the border radius
+        width: '100%', // Match the width with the Overview component
       }}
     >
       <Grid item xs={6}>
@@ -59,8 +58,8 @@ function WeatherDisplay({ weather }) {
           {weather.main.temp.toFixed(1)}°C
         </Typography>
         <Typography variant='h1' component='h1' sx={{ fontWeight: 'medium' }}>
-          {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}
-          °C - {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
+          {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C -{' '}
+          {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
         </Typography>
       </Grid>
     </Grid>
