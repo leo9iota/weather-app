@@ -9,57 +9,75 @@ function Forecast({ forecastData }) {
   const swiperRef = useRef(null);
 
   const goPrev = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slidePrev();
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
     }
   };
 
   const goNext = () => {
-    if (swiperRef.current) {
-      swiperRef.current.slideNext();
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
     }
   };
 
   return (
-    <Paper elevation={3} sx={{ padding: 2, position: 'relative' }}>
-      <IconButton sx={{ position: 'absolute', left: 0, zIndex: 1 }} onClick={goPrev}>
-        <BackArrow />
-      </IconButton>
-
+    <Paper elevation={3} sx={{ padding: 2, position: 'relative', paddingLeft: 4, paddingRight: 4 }}>
       <Typography variant='h2' component='h2' sx={{ marginBottom: 2 }}>
         Weather Forecast
       </Typography>
 
-      {forecastData && forecastData.list ? (
-        <Swiper
-          ref={swiperRef}
-          spaceBetween={50}
-          slidesPerView={3}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {forecastData.list.slice(0, 24).map((item, index) => (
+      <IconButton
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: 0,
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+        onClick={goPrev}
+      >
+        <BackArrow />
+      </IconButton>
+
+      <Swiper
+        ref={swiperRef}
+        spaceBetween={50}
+        slidesPerView={3}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {forecastData && forecastData.list ? (
+          forecastData.list.slice(0, 24).map((item, index) => (
             <SwiperSlide key={index}>
               <Grid container spacing={2} sx={{ padding: 2 }}>
                 <Grid item xs={12}>
-                  <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                  <Typography variant='body1' sx={{ fontWeight: 'bold', userSelect: 'none' }}>
                     {new Date(item.dt * 1000).toLocaleTimeString()}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant='body2'>
+                  <Typography variant='body2' sx={{ userSelect: 'none' }}>
                     {item.weather[0].description}, Temp: {item.main.temp}°C
                   </Typography>
                 </Grid>
               </Grid>
             </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <Typography>No forecast data available</Typography>
-      )}
+          ))
+        ) : (
+          <Typography>No forecast available</Typography>
+        )}
+      </Swiper>
 
-      <IconButton sx={{ position: 'absolute', right: 0, zIndex: 1 }} onClick={goNext}>
+      <IconButton
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          right: 0,
+          transform: 'translateY(-50%)',
+          zIndex: 1,
+        }}
+        onClick={goNext}
+      >
         <ForwardArrow />
       </IconButton>
     </Paper>
