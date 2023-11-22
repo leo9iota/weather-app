@@ -45,11 +45,15 @@ function Dashboard() {
   return (
     <>
       <NavBar />
-      <Box sx={{ mt: 2 }}>
+      <Box sx={{ mt: 2, mx: 'auto', maxWidth: 1280 }}>
+        {' '}
+        {/* Adjust the maxWidth as needed */}
         <Grid container spacing={2}>
           {/* Search Bar and Weather Display */}
           <Grid item xs={12} md={6}>
-            <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
+            <Paper elevation={3} sx={{ height: '100%', padding: 2, mx: 2 }}>
+              {' '}
+              {/* Margin X applied */}
               <SearchBar
                 city={city}
                 onCityChange={handleSearchBarOnChange}
@@ -61,12 +65,20 @@ function Dashboard() {
 
           {/* Overview */}
           <Grid item xs={12} md={6}>
-            <Overview weatherData={weatherData} />
+            <Paper elevation={3} sx={{ padding: 2, mx: 2 }}>
+              {' '}
+              {/* Margin X applied */}
+              <Overview weatherData={weatherData} />
+            </Paper>
           </Grid>
 
           {/* Forecast */}
-          <Grid item xs={12} md={12}>
-            <Forecast forecastData={forecastData} />
+          <Grid item xs={12}>
+            <Paper elevation={3} sx={{ padding: 2, mx: 2 }}>
+              {' '}
+              {/* Margin X applied */}
+              <Forecast forecastData={forecastData} />
+            </Paper>
           </Grid>
         </Grid>
       </Box>
