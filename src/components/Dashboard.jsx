@@ -11,6 +11,7 @@ import Forecast from './Forecast';
 
 function Dashboard({ onToggleTheme }) {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
   const [city, setCity] = useState('');
 
   // Access the API key safely through environment variables
@@ -19,16 +20,22 @@ function Dashboard({ onToggleTheme }) {
 
   // Function to handle the search action
   const handleSearch = () => {
+    // Fetch general weather data
     axios
       .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
       .then((response) => {
         setWeatherData(response.data);
+
+        // Fetch forecast data
+        return axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+        );
+      })
+      .then((response) => {
+        setForecastData(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching weather data', error);
-      })
-      .finally(() => {
-        // Any cleanup actions if needed
+        console.error('Error fetching data', error);
       });
   };
 
@@ -56,7 +63,7 @@ function Dashboard({ onToggleTheme }) {
               <Overview weatherData={weatherData} />
             </Grid>
             <Grid item xs={12}>
-              <Forecast />
+              <Forecast forecastData={forecastData}/>
             </Grid>
           </Grid>
         </Grid>
