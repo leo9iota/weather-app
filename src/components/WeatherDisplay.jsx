@@ -1,6 +1,6 @@
-// WeatherDisplay.jsx
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
+import backgroundImage from '../images/background/png/rain-day.png'; // Replace with the actual path to your image
 
 function WeatherDisplay({ weather }) {
   const formatDate = (timestamp) => {
@@ -26,7 +26,21 @@ function WeatherDisplay({ weather }) {
   };
 
   return (
-    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+    <Grid
+      container
+      rowSpacing={1}
+      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      sx={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        borderRadius: '4px', // Adjust as needed for rounded corners
+        overflow: 'hidden', // Ensures the background respects the border radius
+        // Ensure the component takes full width of its container, similar to Overview
+        width: '100%',
+      }}
+    >
       <Grid item xs={6}>
         <Typography variant='h2' component='h2'>
           {weather.name}
