@@ -48,7 +48,8 @@ function Dashboard({ onToggleTheme }) {
       <NavBar />
       <Box sx={{ mt: 2 }}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          {/* Search Bar and Weather Display */}
+          <Grid item xs={12} md={6}>
             <Paper elevation={3} sx={{ height: '100%', padding: 2 }}>
               <SearchBar
                 city={city}
@@ -58,13 +59,15 @@ function Dashboard({ onToggleTheme }) {
               {weatherData && <WeatherDisplay weather={weatherData} />}
             </Paper>
           </Grid>
-          <Grid item xs={6} container spacing={2}>
-            <Grid item xs={12}>
-              <Overview weatherData={weatherData} />
-            </Grid>
-            <Grid item xs={12}>
-              <Forecast forecastData={forecastData}/>
-            </Grid>
+
+          {/* Overview */}
+          <Grid item xs={12} md={6}>
+            <Overview weatherData={weatherData} />
+          </Grid>
+
+          {/* Forecast */}
+          <Grid item xs={12} md={12}>
+            <Forecast forecastData={forecastData} />
           </Grid>
         </Grid>
       </Box>
