@@ -53,7 +53,7 @@ function Dashboard({ onToggleTheme }) {
           </Grid>
           <Grid item xs={6} container spacing={2}>
             <Grid item xs={12}>
-              <Overview />
+              <Overview weatherData={weatherData} />
             </Grid>
             <Grid item xs={12}>
               <Forecast />
