@@ -10,7 +10,7 @@ import Forecast from './Forecast';
 // import ThemeToggle from './ThemeToggle';
 
 function Dashboard({ onToggleTheme }) {
-  const [weather, setWeather] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState('');
 
   // Access the API key safely through environment variables
@@ -22,7 +22,7 @@ function Dashboard({ onToggleTheme }) {
     axios
       .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
       .then((response) => {
-        setWeather(response.data);
+        setWeatherData(response.data);
       })
       .catch((error) => {
         console.error('Error fetching weather data', error);
@@ -71,9 +71,9 @@ function Dashboard({ onToggleTheme }) {
                 onCityChange={handleSearchBarOnChange}
                 onSearch={handleSearch}
               />
-              {weather && (
+              {weatherData && (
                 <WeatherDisplay
-                  weather={weather}
+                  weather={weatherData}
                   formatDate={formatDate}
                   formatTime={formatTime}
                   isDayTime={isDayTime}
