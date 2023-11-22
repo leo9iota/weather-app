@@ -28,10 +28,10 @@ function WeatherDisplay({ weather }) {
   return (
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       <Grid item xs={6}>
-        <Typography variant='h3' component='h3'>
+        <Typography variant='h2' component='h2'>
           {weather.name}
         </Typography>
-        <Typography variant='h4' component='h4'>
+        <Typography variant='h6' component='h6'>
           {formatDate(weather.dt)}
         </Typography>
       </Grid>
@@ -41,10 +41,10 @@ function WeatherDisplay({ weather }) {
         </Typography>
       </Grid>
       <Grid item xs={6}>
-        <Typography variant='h4' component='h4' sx={{ fontWeight: 'medium' }}>
+        <Typography variant='h1' component='h1' sx={{ fontWeight: 'medium' }}>
           {weather.main.temp.toFixed(1)}°C
         </Typography>
-        <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
+        <Typography variant='h1' component='h1' sx={{ fontWeight: 'medium' }}>
           {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}
           °C - {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
         </Typography>
