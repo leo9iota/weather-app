@@ -12,7 +12,6 @@ import {
   Hidden,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import ThemeToggle from './ThemeToggle';
 
 function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -47,7 +46,6 @@ function NavBar() {
             Weather App
           </Typography>
           {/* Menu items visible on medium screens and up */}
-          <ThemeToggle />
           <Hidden smDown>
             {menuItems.map((item, index) => (
               <Typography key={index} sx={{ margin: 1 }}>

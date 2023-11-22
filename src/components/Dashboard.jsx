@@ -7,9 +7,8 @@ import SearchBar from './SearchBar';
 import WeatherDisplay from './WeatherDisplay';
 import Overview from './Overview';
 import Forecast from './Forecast';
-import { ThemeProvider } from './ThemeContext';
 
-function Dashboard({ onToggleTheme }) {
+function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [city, setCity] = useState('');
@@ -44,7 +43,7 @@ function Dashboard({ onToggleTheme }) {
   };
 
   return (
-    <ThemeProvider>
+    <>
       <NavBar />
       <Box sx={{ mt: 2 }}>
         <Grid container spacing={2}>
@@ -71,7 +70,7 @@ function Dashboard({ onToggleTheme }) {
           </Grid>
         </Grid>
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
 
