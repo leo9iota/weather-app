@@ -29,7 +29,7 @@ function NavBar() {
 
   return (
     <>
-      <AppBar position='static' sx={{ borderRadius: '8px' }}>
+      <AppBar position='static' sx={{ borderRadius: '0px' }}>
         <Toolbar>
           {/* Burger icon visible on small screens only */}
           <Hidden smUp>
