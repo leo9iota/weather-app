@@ -11,7 +11,7 @@ const ThemeContext = createContext({
 export const useThemeContext = () => React.useContext(ThemeContext);
 
 export const ThemeProviderWrapper = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState('light');
+  const [currentTheme, setCurrentTheme] = useState('dark');
   const toggleTheme = () =>
     setCurrentTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
 
