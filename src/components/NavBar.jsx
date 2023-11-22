@@ -1,4 +1,3 @@
-// NavBar.jsx
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -10,6 +9,7 @@ import {
   ListItem,
   ListItemText,
   Box,
+  Hidden,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -30,19 +30,29 @@ function NavBar() {
     <>
       <AppBar position='static' sx={{ borderRadius: '8px' }}>
         <Toolbar>
-          <IconButton
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
+          {/* Burger icon visible on small screens only */}
+          <Hidden smUp>
+            <IconButton
+              edge='start'
+              color='inherit'
+              aria-label='menu'
+              sx={{ mr: 2 }}
+              onClick={toggleDrawer(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             Weather App
           </Typography>
-          {/* Add more items here if needed */}
+          {/* Menu items visible on medium screens and up */}
+          <Hidden smDown>
+            {menuItems.map((item, index) => (
+              <Typography key={index} sx={{ margin: 1 }}>
+                {item}
+              </Typography>
+            ))}
+          </Hidden>
         </Toolbar>
       </AppBar>
       <Drawer anchor='left' open={isDrawerOpen} onClose={toggleDrawer(false)}>
