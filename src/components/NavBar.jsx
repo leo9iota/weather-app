@@ -12,6 +12,7 @@ import {
   Hidden,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ThemeToggle from './ThemeToggle';
 
 function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -53,6 +54,7 @@ function NavBar() {
               </Typography>
             ))}
           </Hidden>
+          <ThemeToggle />
         </Toolbar>
       </AppBar>
       <Drawer anchor='left' open={isDrawerOpen} onClose={toggleDrawer(false)}>
