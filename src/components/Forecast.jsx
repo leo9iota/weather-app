@@ -21,7 +21,7 @@ function Forecast({ forecastData, weatherData }) {
   };
 
   return (
-    <Paper elevation={0} sx={{ padding: 2, position: 'relative', paddingLeft: 4, paddingRight: 4 }}>
+    <Paper elevation={3} sx={{ padding: 2, position: 'relative', paddingLeft: 4, paddingRight: 4 }}>
       <Typography variant='h2' component='h2' sx={{ marginBottom: 2 }}>
         {weatherData?.name} Forecast
       </Typography>
