@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Box, Typography } from '@mui/material';
-import backgroundImage from '../images/background/rain-day.png'; // Replace with the actual path to your image
+import backgroundImage from '../images/backgrounds/rain-day.png';
+import weatherSymbol from '../images/symbols/clear-day.png';
 
 function WeatherDisplay({ weather }) {
   const formatDate = (timestamp) => {
@@ -41,6 +42,7 @@ function WeatherDisplay({ weather }) {
         boxSizing: 'border-box',
         color: 'white',
         textShadow: '1px 1px 2px black',
+        position: 'relative', // Needed for absolute positioning of the symbol
       }}
     >
       <Grid container spacing={2}>
@@ -68,6 +70,17 @@ function WeatherDisplay({ weather }) {
         </Grid>
         {/* Additional weather details can be added here */}
       </Grid>
+      <Box
+        component='img'
+        src={weatherSymbol}
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          height: '200px',
+          width: 'auto',
+        }}
+      />
     </Box>
   );
 }
