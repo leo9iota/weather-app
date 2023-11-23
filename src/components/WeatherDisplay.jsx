@@ -8,7 +8,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import backgroundImage from '../images/backgrounds/rain-day.svg';
 import weatherSymbol from '../images/symbols/clear-day.svg';
 
-function WeatherDisplay({ weather }) {
+function WeatherDisplay({ weatherData }) {
   const theme = useTheme();
 
   const formatDate = (timestamp) => {
@@ -31,20 +31,20 @@ function WeatherDisplay({ weather }) {
     });
   };
 
-  const { weekday, dateStr } = formatDate(weather.dt);
-  const time = formatTime(weather.dt);
+  const { weekday, dateStr } = formatDate(weatherData.dt);
+  const time = formatTime(weatherData.dt);
 
   const isDayTime = (sunrise, sunset, currentTime) => {
     return currentTime >= sunrise && currentTime < sunset;
   };
 
-  const dayTimeIcon = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt) ? (
+  const dayTimeIcon = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt) ? (
     <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
   ) : (
     <NightsStayIcon />
   );
 
-  const dayTimeText = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)
+  const dayTimeText = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt)
     ? 'Day'
     : 'Night';
 
@@ -77,7 +77,7 @@ function WeatherDisplay({ weather }) {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
           <Typography variant='h6' sx={{ display: 'flex', alignItems: 'center' }}>
             <LocationOnIcon />
-            {weather.name}
+            {weatherData.name}
           </Typography>
           <Typography variant='subtitle2'>{weekday}</Typography>
           <Typography variant='subtitle2'>{dateStr}</Typography>
@@ -108,7 +108,7 @@ function WeatherDisplay({ weather }) {
           <Typography variant='h1' component='div' sx={{ fontSize: '3rem' }}>
             {' '}
             {/* Increased font size */}
-            {weather.main.temp.toFixed(1)}°C
+            {weatherData.main.temp.toFixed(1)}°C
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {dayTimeIcon}
@@ -121,7 +121,7 @@ function WeatherDisplay({ weather }) {
             <Typography variant='body1' sx={{ fontSize: '1.25rem' }}>
               {' '}
               {/* Increased font size */}
-              {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C
+              {weatherData.main.temp_min.toFixed(1)}°C / {weatherData.main.temp_max.toFixed(1)}°C
             </Typography>
           </Box>
         </Box>
