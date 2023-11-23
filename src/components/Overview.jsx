@@ -30,7 +30,7 @@ function Overview({ weatherData }) {
   const iconColor = theme.palette.mode === 'dark' ? 'white' : 'black';
 
   return (
-    <Paper elevation={3} sx={{ padding: 3, color: theme.palette.text.primary }}>
+    <Paper elevation={0} sx={{ padding: 3, color: theme.palette.text.primary }}>
       <Typography variant='h2' component='h2' sx={{ marginBottom: 2 }}>
         {weatherData?.name} Overview
       </Typography>
