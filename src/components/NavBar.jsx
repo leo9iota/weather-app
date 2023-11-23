@@ -32,7 +32,7 @@ function NavBar() {
       <AppBar position='static' sx={{ borderRadius: '0px' }}>
         <Toolbar>
           {/* Burger icon visible on small screens only */}
-          <Hidden smUp>
+          <Hidden mdUp>
             <IconButton
               edge='start'
               color='inherit'
@@ -47,7 +47,7 @@ function NavBar() {
             Weather App
           </Typography>
           {/* Menu items visible on medium screens and up */}
-          <Hidden smDown>
+          <Hidden mdDown>
             {menuItems.map((item, index) => (
               <Typography key={index} sx={{ margin: 1 }}>
                 {item}
