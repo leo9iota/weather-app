@@ -1,31 +1,43 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn'; // icon for location
+import AccessTimeIcon from '@mui/icons-material/AccessTime'; // icon for current time
+import NightsStayIcon from '@mui/icons-material/NightsStay'; // icon for night time
+import WbSunnyIcon from '@mui/icons-material/WbSunny'; // icon for day time
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'; // icon for separator
 import backgroundImage from '../images/backgrounds/rain-day.svg';
 import weatherSymbol from '../images/symbols/clear-day.svg';
 
 function WeatherDisplay({ weather }) {
+  const theme = useTheme();
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return {
+      day: date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+      }),
+      time: date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      }),
+    };
   };
 
-  const formatTime = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
-  };
+  const dateTime = formatDate(weather.dt);
 
   const isDayTime = (sunrise, sunset, currentTime) => {
-    return currentTime >= sunrise && currentTime < sunset ? 'Day' : 'Evening';
+    return currentTime >= sunrise && currentTime < sunset;
   };
+
+  const dayTimeStatus = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt) ? (
+    <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
+  ) : (
+    <NightsStayIcon />
+  );
 
   return (
     <Box
@@ -47,36 +59,58 @@ function WeatherDisplay({ weather }) {
         position: 'relative',
       }}
     >
-      {/* Top section for the city and exact date on the left, current time on the right */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant='h6'>
-          {weather.name}, {formatDate(weather.dt)}
-        </Typography>
-        <Typography variant='h6'>{formatTime(weather.dt)}</Typography>
+      {/* Top section */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <LocationOnIcon />
+          <Box>
+            <Typography variant='h6'>{weather.name}</Typography>
+            <Typography variant='subtitle2'>{dateTime.day}</Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <AccessTimeIcon />
+          <Typography variant='h6'>{dateTime.time}</Typography>
+        </Box>
       </Box>
-
-      {/* Bottom section for the current temperature on the left, weather symbol on the right */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <Box>
-          <Typography variant='h2' component='div'>
+      {/* Bottom section */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          position: 'absolute',
+          bottom: theme.spacing(2),
+          width: '100%',
+          px: theme.spacing(2),
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Typography variant='h2' component='div' sx={{ lineHeight: 1 }}>
             {weather.main.temp.toFixed(1)}°C
           </Typography>
-          <Typography variant='body1' component='div'>
-            {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C
-          </Typography>
-          <Typography variant='body2' component='div'>
-            {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography
+              variant='body1'
+              component='div'
+              sx={{ display: 'flex', alignItems: 'center' }}
+            >
+              {weather.main.temp_min.toFixed(1)}
+              <FiberManualRecordIcon fontSize='small' sx={{ mx: 1 }} />
+              {weather.main.temp_max.toFixed(1)}°C
+            </Typography>
+            {dayTimeStatus}
+          </Box>
         </Box>
         <Box
           component='img'
           src={weatherSymbol}
           sx={{
             position: 'absolute',
-            bottom: -110,
-            right: -100,
+            bottom: -70,
+            right: -50,
             height: 'auto',
-            width: '450px',
+            width: '350px',
           }}
         />
       </Box>
