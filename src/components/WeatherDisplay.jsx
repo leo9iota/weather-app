@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import backgroundImage from '../images/backgrounds/rain-day.svg';
 import weatherSymbol from '../images/symbols/clear-day.svg';
 
@@ -19,6 +19,7 @@ function WeatherDisplay({ weather }) {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
+      hour12: true,
     });
   };
 
@@ -31,6 +32,7 @@ function WeatherDisplay({ weather }) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'space-between', // Align children top and bottom
         minHeight: '35vh',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -45,19 +47,17 @@ function WeatherDisplay({ weather }) {
         position: 'relative',
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Typography variant='h4' gutterBottom>
-            {weather.name}
-          </Typography>
-          <Typography variant='subtitle1' gutterBottom>
-            {formatDate(weather.dt)}
-          </Typography>
-          <Typography variant='h6' gutterBottom>
-            {formatTime(weather.dt)}
-          </Typography>
-        </Grid>
-        <Grid item xs={12} md={6} sx={{ textAlign: 'right' }}>
+      {/* Top section for the city and exact date on the left, current time on the right */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography variant='h6'>
+          {weather.name}, {formatDate(weather.dt)}
+        </Typography>
+        <Typography variant='h6'>{formatTime(weather.dt)}</Typography>
+      </Box>
+
+      {/* Bottom section for the current temperature on the left, weather symbol on the right */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <Box>
           <Typography variant='h2' component='div'>
             {weather.main.temp.toFixed(1)}°C
           </Typography>
@@ -67,20 +67,19 @@ function WeatherDisplay({ weather }) {
           <Typography variant='body2' component='div'>
             {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
           </Typography>
-        </Grid>
-        {/* Additional weather details can be added here */}
-      </Grid>
-      <Box
-        component='img'
-        src={weatherSymbol}
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0, // Position to the bottom-left corner
-          height: '400px',
-          width: 'auto',
-        }}
-      />
+        </Box>
+        <Box
+          component='img'
+          src={weatherSymbol}
+          sx={{
+            position: 'absolute',
+            bottom: -110,
+            right: -100,
+            height: 'auto',
+            width: '450px',
+          }}
+        />
+      </Box>
     </Box>
   );
 }
