@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Box, Typography } from '@mui/material';
-import backgroundImage from '../images/background/png/rain-day.png'; // Replace with the actual path to your image
+import backgroundImage from '../images/background/rain-day.png'; // Replace with the actual path to your image
 
 function WeatherDisplay({ weather }) {
   const formatDate = (timestamp) => {
