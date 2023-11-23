@@ -13,19 +13,23 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ThemeToggle from './ThemeToggle';
+import { useThemeContext } from './ThemeContext'; // import the useThemeContext hook
 
 function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { currentTheme } = useThemeContext(); // use the currentTheme from context
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    
+
     setIsDrawerOpen(open);
   };
 
   const menuItems = ['Home', 'Pricing', 'About'];
+
+  const isDarkTheme = currentTheme === 'dark';
 
   return (
     <>
@@ -33,12 +37,12 @@ function NavBar() {
         position='sticky'
         sx={{
           backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(22, 22, 31, 0.6)',
+          backgroundColor: isDarkTheme ? 'rgba(22, 22, 31, 0.6)' : 'rgba(255, 255, 255, 0.6)',
           boxShadow: 'none',
+          color: isDarkTheme ? 'white' : 'black',
         }}
       >
         <Toolbar sx={{ minHeight: 56 }}>
-          {/* Burger icon visible on small screens only */}
           <Hidden mdUp>
             <IconButton
               edge='start'
@@ -53,7 +57,6 @@ function NavBar() {
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             Weather App
           </Typography>
-          {/* Menu items visible on medium screens and up */}
           <Hidden mdDown>
             {menuItems.map((item, index) => (
               <Typography
