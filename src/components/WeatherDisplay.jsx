@@ -31,7 +31,7 @@ function WeatherDisplay({ weather }) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '45vh',
+        minHeight: '35vh',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
