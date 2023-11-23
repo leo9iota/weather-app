@@ -27,7 +27,7 @@ function WeatherDisplay({ weather }) {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false, // Changed to 24-hour format
+      hour12: false,
     });
   };
 
@@ -59,7 +59,7 @@ function WeatherDisplay({ weather }) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        p: 2,
+        p: 0,
         borderRadius: 2,
         overflow: 'hidden',
         boxSizing: 'border-box',
@@ -69,14 +69,18 @@ function WeatherDisplay({ weather }) {
       }}
     >
       {/* Top section for location and time */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', p: 2 }}
+      >
+        {' '}
+        {/* Padding added here */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
           <Typography variant='h6' sx={{ display: 'flex', alignItems: 'center' }}>
-            <LocationOnIcon sx={{ mr: 1 }} />
+            <LocationOnIcon />
             {weather.name}
           </Typography>
-          <Typography variant='subtitle2'>{dateStr}</Typography>
           <Typography variant='subtitle2'>{weekday}</Typography>
+          <Typography variant='subtitle2'>{dateStr}</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <AccessTimeIcon />
@@ -87,30 +91,37 @@ function WeatherDisplay({ weather }) {
       {/* Bottom section for temperature */}
       <Box
         sx={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          pt: 0,
+          pb: 0,
+          pl: 2,
+          pr: 2,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          position: 'absolute',
-          bottom: theme.spacing(2),
-          width: '100%',
-          px: theme.spacing(2),
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}>
-          <Typography variant='h2' component='div'>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1.5 }}>
+          <Typography variant='h1' component='div' sx={{ fontSize: '3rem' }}>
+            {' '}
+            {/* Increased font size */}
             {weather.main.temp.toFixed(1)}°C
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }}>
-              {weather.main.temp_min.toFixed(1)}°C
-            </Typography>
-            <FiberManualRecordIcon fontSize='small' sx={{ fontSize: '0.5rem', margin: '0 8px' }} />
-            <Typography variant='body1' sx={{ display: 'flex', alignItems: 'center' }}>
-              {weather.main.temp_max.toFixed(1)}°C
-            </Typography>
             {dayTimeIcon}
-            <Typography variant='caption' sx={{ ml: 1 }}>
+            <Typography variant='subtitle1' sx={{ ml: 1, fontSize: '1.25rem' }}>
+              {' '}
+              {/* Increased font size */}
               {dayTimeText}
+            </Typography>
+            <FiberManualRecordIcon fontSize='small' sx={{ fontSize: '0.5rem', mx: 1 }} />
+            <Typography variant='body1' sx={{ fontSize: '1.25rem' }}>
+              {' '}
+              {/* Increased font size */}
+              {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C
             </Typography>
           </Box>
         </Box>
@@ -118,10 +129,7 @@ function WeatherDisplay({ weather }) {
           component='img'
           src={weatherSymbol}
           sx={{
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            height: '150px', // Adjust size accordingly
+            height: '150px',
             width: 'auto',
           }}
         />
