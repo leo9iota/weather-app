@@ -28,9 +28,9 @@ function WeatherDisplay({ weather }) {
   return (
     <Box
       sx={{
-        display: 'flex', // Use flex display to control child component sizing
-        flexDirection: 'column', // Stack children vertically
-        minHeight: '100vh', // Minimum height to fill the screen height
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '35vh',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
