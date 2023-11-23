@@ -21,7 +21,7 @@ function NavBar() {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
+    
     setIsDrawerOpen(open);
   };
 
@@ -29,8 +29,15 @@ function NavBar() {
 
   return (
     <>
-      <AppBar position='static' sx={{ borderRadius: '0px' }}>
-        <Toolbar>
+      <AppBar
+        position='sticky'
+        sx={{
+          backdropFilter: 'blur(10px)',
+          backgroundColor: 'rgba(22, 22, 31, 0.6)',
+          boxShadow: 'none',
+        }}
+      >
+        <Toolbar sx={{ minHeight: 56 }}>
           {/* Burger icon visible on small screens only */}
           <Hidden mdUp>
             <IconButton
@@ -49,7 +56,19 @@ function NavBar() {
           {/* Menu items visible on medium screens and up */}
           <Hidden mdDown>
             {menuItems.map((item, index) => (
-              <Typography key={index} sx={{ margin: 1 }}>
+              <Typography
+                key={index}
+                sx={{
+                  margin: 1,
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: 'secondary.main',
+                    textDecoration: 'underline',
+                    transform: 'scale(1.05)',
+                    transition: 'all 0.3s ease',
+                  },
+                }}
+              >
                 {item}
               </Typography>
             ))}
