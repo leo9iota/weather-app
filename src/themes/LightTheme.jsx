@@ -1,4 +1,3 @@
-// LightTheme.jsx
 import { createTheme } from '@mui/material';
 
 export const lightTheme = createTheme({
@@ -18,16 +17,16 @@ export const lightTheme = createTheme({
       paper: '#ffffff', // Pure white for paper elements
     },
     primary: {
-      main: '#a7c0f2', // A soft pastel blue for primary elements
-      contrastText: '#000000', // Black for text on primary elements for better readability
+      main: '#f0e8d9', // An off-white, creamy color for primary elements
+      contrastText: '#333333', // Darker text for better readability on off-white
     },
     secondary: {
-      main: '#b3acc1', // A muted lavender for secondary elements
-      contrastText: '#000000', // Black for text on secondary elements for better readability
+      main: '#e3dfd7', // A slightly grayish off-white, for a subtle contrast with primary
+      contrastText: '#333333', // Darker text for better readability on off-white
     },
     text: {
-      primary: '#000000', // Black for primary text, which includes paragraphs
-      secondary: '#535353', // A medium gray for secondary text
+      primary: '#333333', // A dark gray for primary text, softer than black
+      secondary: '#595959', // A medium gray for secondary text, softer than black
     },
     error: {
       main: '#e57373', // A soft red for errors
@@ -54,10 +53,10 @@ export const lightTheme = createTheme({
     },
     // paragraph styles
     body1: {
-      color: '#000000', // Black for body text
+      color: '#333333', // Dark gray for body text
     },
     body2: {
-      color: '#000000', // Black for secondary body text
+      color: '#333333', // Dark gray for secondary body text
     },
     // Other text variants as needed
   },
