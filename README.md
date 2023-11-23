@@ -4,8 +4,10 @@ Weather app made with React and the OpenWeatherMap API that shows the current we
 
 ## 🛠️ Tech Stack
 
-![React](https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg "React")&nbsp;
-![Material UI](https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg "Material UI")
+<div>
+  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" title="React" alt="React" width="50" height="50"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg" title="Material UI" alt="Material UI" width="50" height="50"/>&nbsp;
+</div>
 
 ## 🚀 Dependencies
 
