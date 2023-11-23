@@ -2,6 +2,15 @@
 import { createTheme } from '@mui/material';
 
 export const lightTheme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        * {
+          user-select: none;
+        }
+      `,
+    },
+  },
   palette: {
     mode: 'light',
     background: {
