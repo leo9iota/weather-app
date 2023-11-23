@@ -45,7 +45,7 @@ function WeatherDisplay({ weather }) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between', // Align children top and bottom
-        minHeight: '35vh',
+        minHeight: '319px',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
