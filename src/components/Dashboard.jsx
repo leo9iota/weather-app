@@ -63,7 +63,7 @@ function Dashboard() {
                 onCityChange={handleSearchBarOnChange}
                 onSearch={handleSearch}
               />
-              {weatherData && <WeatherDisplay weather={weatherData} />}
+              {weatherData && <WeatherDisplay weatherData={weatherData} />}
             </Paper>
           </Grid>
 
