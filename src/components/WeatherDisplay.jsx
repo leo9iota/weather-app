@@ -96,7 +96,7 @@ function WeatherDisplay({ weather }) {
           left: 0,
           right: 0,
           pt: 0,
-          pb: 0,
+          pb: 2,
           pl: 2,
           pr: 2,
           display: 'flex',
@@ -126,12 +126,16 @@ function WeatherDisplay({ weather }) {
           </Box>
         </Box>
         <Box
+          sx={{
+            position: 'absolute',
+            bottom: -70, // Aligning to the bottom
+            right: -70, // Aligning to the right
+            height: '350px', // Adjust size accordingly
+            width: 'auto',
+            transform: 'translate(0, 0)', // Resetting any translations
+          }}
           component='img'
           src={weatherSymbol}
-          sx={{
-            height: '150px',
-            width: 'auto',
-          }}
         />
       </Box>
     </Box>
