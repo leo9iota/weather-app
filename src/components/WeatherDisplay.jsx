@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import backgroundImage from '../images/background/png/rain-day.png'; // Replace with the actual path to your image
 
 function WeatherDisplay({ weather }) {
@@ -26,43 +26,49 @@ function WeatherDisplay({ weather }) {
   };
 
   return (
-    <Grid
-      container
-      rowSpacing={1}
-      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+    <Box
       sx={{
+        display: 'flex', // Use flex display to control child component sizing
+        flexDirection: 'column', // Stack children vertically
+        minHeight: '100vh', // Minimum height to fill the screen height
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        borderRadius: '4px', // Rounded corners
-        overflow: 'hidden', // Ensures the background adheres to the border radius
-        width: '100%', // Match the width with the Overview component
+        p: 2,
+        borderRadius: 2,
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        color: 'white',
+        textShadow: '1px 1px 2px black',
       }}
     >
-      <Grid item xs={6}>
-        <Typography variant='h2' component='h2'>
-          {weather.name}
-        </Typography>
-        <Typography variant='h6' component='h6'>
-          {formatDate(weather.dt)}
-        </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <Typography variant='h4' gutterBottom>
+            {weather.name}
+          </Typography>
+          <Typography variant='subtitle1' gutterBottom>
+            {formatDate(weather.dt)}
+          </Typography>
+          <Typography variant='h6' gutterBottom>
+            {formatTime(weather.dt)}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={6} sx={{ textAlign: 'right' }}>
+          <Typography variant='h2' component='div'>
+            {weather.main.temp.toFixed(1)}°C
+          </Typography>
+          <Typography variant='body1' component='div'>
+            {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C
+          </Typography>
+          <Typography variant='body2' component='div'>
+            {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
+          </Typography>
+        </Grid>
+        {/* Additional weather details can be added here */}
       </Grid>
-      <Grid item xs={6}>
-        <Typography variant='h6' component='h6' sx={{ fontWeight: 'medium' }}>
-          {formatTime(weather.dt)}
-        </Typography>
-      </Grid>
-      <Grid item xs={6}>
-        <Typography variant='h1' component='h1' sx={{ fontWeight: 'medium' }}>
-          {weather.main.temp.toFixed(1)}°C
-        </Typography>
-        <Typography variant='h1' component='h1' sx={{ fontWeight: 'medium' }}>
-          {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C -{' '}
-          {isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)}
-        </Typography>
-      </Grid>
-    </Grid>
+    </Box>
   );
 }
 
