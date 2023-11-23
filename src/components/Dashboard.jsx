@@ -49,7 +49,15 @@ function Dashboard() {
         <Grid container spacing={2}>
           {/* Search Bar and Weather Display */}
           <Grid item xs={12} md={7} lg={8}>
-            <Paper elevation={3} sx={{ height: '100%', padding: 2, mx: 2, mr: 0 }}>
+            <Paper
+              elevation={3}
+              sx={{
+                height: '100%',
+                padding: 2,
+                mx: 2,
+                mr: { xs: 2, md: 0 }, // Apply right margin on xs and remove on md
+              }}
+            >
               <SearchBar
                 city={city}
                 onCityChange={handleSearchBarOnChange}
@@ -61,7 +69,14 @@ function Dashboard() {
 
           {/* Overview */}
           <Grid item xs={12} md={5} lg={4}>
-            <Paper elevation={3} sx={{ padding: 0, mx: 2, ml: 0 }}>
+            <Paper
+              elevation={3}
+              sx={{
+                padding: 0,
+                mx: 2,
+                ml: { xs: 2, md: 0 }, // Apply left margin on xs and remove on md
+              }}
+            >
               <Overview weatherData={weatherData} />
             </Paper>
           </Grid>
@@ -74,6 +89,7 @@ function Dashboard() {
           </Grid>
         </Grid>
       </Box>
+      <Box sx={{ height: '500px' }}></Box> {/* Bottom spacing */}
     </>
   );
 }
