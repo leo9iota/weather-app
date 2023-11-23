@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn'; // icon for location
-import AccessTimeIcon from '@mui/icons-material/AccessTime'; // icon for current time
-import NightsStayIcon from '@mui/icons-material/NightsStay'; // icon for night time
-import WbSunnyIcon from '@mui/icons-material/WbSunny'; // icon for day time
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'; // icon for separator
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import NightsStayIcon from '@mui/icons-material/NightsStay';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import backgroundImage from '../images/backgrounds/rain-day.svg';
 import weatherSymbol from '../images/symbols/clear-day.svg';
 
@@ -13,31 +13,37 @@ function WeatherDisplay({ weather }) {
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
-    return {
-      day: date.toLocaleDateString('en-US', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric',
-      }),
-      time: date.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      }),
-    };
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   };
 
-  const dateTime = formatDate(weather.dt);
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false, // Changed to 24-hour format
+    });
+  };
 
   const isDayTime = (sunrise, sunset, currentTime) => {
     return currentTime >= sunrise && currentTime < sunset;
   };
 
-  const dayTimeStatus = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt) ? (
+  // Determine day/night and the corresponding icon.
+  const dayTimeIcon = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt) ? (
     <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
   ) : (
     <NightsStayIcon />
   );
+
+  const dayTimeText = isDayTime(weather.sys.sunrise, weather.sys.sunset, weather.dt)
+    ? 'Day'
+    : 'Night';
 
   return (
     <Box
@@ -59,58 +65,57 @@ function WeatherDisplay({ weather }) {
         position: 'relative',
       }}
     >
-      {/* Top section */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <LocationOnIcon />
-          <Box>
-            <Typography variant='h6'>{weather.name}</Typography>
-            <Typography variant='subtitle2'>{dateTime.day}</Typography>
-          </Box>
+      {/* Top section for location and time */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+          <Typography variant='h6' sx={{ display: 'flex', alignItems: 'center' }}>
+            <LocationOnIcon sx={{ mr: 1 }} />
+            {weather.name}
+          </Typography>
+          <Typography variant='subtitle2'>{formatDate(weather.dt)}</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <AccessTimeIcon />
-          <Typography variant='h6'>{dateTime.time}</Typography>
+          <Typography variant='h6'>{formatTime(weather.dt)}</Typography>
         </Box>
       </Box>
-      {/* Bottom section */}
+
+      {/* Bottom section for temperature */}
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'flex-end',
           position: 'absolute',
           bottom: theme.spacing(2),
           width: '100%',
           px: theme.spacing(2),
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box>
           <Typography variant='h2' component='div' sx={{ lineHeight: 1 }}>
             {weather.main.temp.toFixed(1)}°C
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography
-              variant='body1'
-              component='div'
-              sx={{ display: 'flex', alignItems: 'center' }}
-            >
-              {weather.main.temp_min.toFixed(1)}
-              <FiberManualRecordIcon fontSize='small' sx={{ mx: 1 }} />
-              {weather.main.temp_max.toFixed(1)}°C
+            {dayTimeIcon}
+            <Typography variant='caption' sx={{ ml: 1 }}>
+              {dayTimeText}
             </Typography>
-            {dayTimeStatus}
+            <FiberManualRecordIcon fontSize='inherit' sx={{ mx: 1 }} />
+            <Typography variant='body1'>
+              {weather.main.temp_min.toFixed(1)}°C / {weather.main.temp_max.toFixed(1)}°C
+            </Typography>
           </Box>
         </Box>
         <Box
           component='img'
           src={weatherSymbol}
           sx={{
+            height: '150px', // Adjust size accordingly
+            width: 'auto',
             position: 'absolute',
-            bottom: -70,
-            right: -50,
-            height: 'auto',
-            width: '350px',
+            bottom: 0,
+            right: 0,
           }}
         />
       </Box>
