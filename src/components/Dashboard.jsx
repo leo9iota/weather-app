@@ -77,7 +77,7 @@ function Dashboard() {
             <Paper elevation={3} sx={{ padding: 0, mx: 2 }}>
               {' '}
               {/* Margin X applied */}
-              <Forecast forecastData={forecastData} />
+              <Forecast forecastData={forecastData} weatherData={weatherData} />
             </Paper>
           </Grid>
         </Grid>

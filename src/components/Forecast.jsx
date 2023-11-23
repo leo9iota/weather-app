@@ -5,7 +5,7 @@ import ForwardArrow from '@mui/icons-material/ArrowForwardIosRounded';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-function Forecast({ forecastData }) {
+function Forecast({ forecastData, weatherData }) {
   const swiperRef = useRef(null);
 
   const goPrev = () => {
@@ -23,7 +23,7 @@ function Forecast({ forecastData }) {
   return (
     <Paper elevation={3} sx={{ padding: 2, position: 'relative', paddingLeft: 4, paddingRight: 4 }}>
       <Typography variant='h2' component='h2' sx={{ marginBottom: 2 }}>
-        Weather Forecast
+        {weatherData?.name} Forecast
       </Typography>
 
       <IconButton
