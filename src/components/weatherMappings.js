@@ -1,4 +1,4 @@
-// weatherMapping.js
+// weatherMappings.js
 export const backgroundImages = {
   '01d': 'clear-day',
   '01n': 'clear-night',
@@ -18,6 +18,7 @@ export const backgroundImages = {
   '13n': 'snow-night',
   '50d': 'cloudy-day',
   '50n': 'cloudy-night',
+  default: 'default',
 };
 
 export const weatherSymbols = {

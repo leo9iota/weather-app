@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import backgroundImage from '../images/backgrounds/rain-day.svg';
-import weatherSymbol from '../images/symbols/clear-day.svg';
+
+// Import your mappings from the weatherMapping.js file
+import { backgroundImages, weatherSymbols } from './weatherMappings';
 
 function WeatherDisplay({ weatherData }) {
   const theme = useTheme();
+
+  // States for background and icon
+  const [background, setBackground] = useState('default');
+  const [icon, setIcon] = useState('default');
+
+  // Effect hook to update the state when weatherData changes
+  useEffect(() => {
+    const weatherIconCode = weatherData?.weather?.[0]?.icon; // Safely access the icon code
+    if (weatherIconCode) {
+      const newBackground = backgroundImages[weatherIconCode] || backgroundImages.default;
+      const newIcon = weatherSymbols[weatherIconCode] || weatherSymbols.default;
+      setBackground(newBackground);
+      setIcon(newIcon);
+    }
+  }, [weatherData]);
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp * 1000);
@@ -31,12 +47,12 @@ function WeatherDisplay({ weatherData }) {
     });
   };
 
-  const { weekday, dateStr } = formatDate(weatherData.dt);
-  const time = formatTime(weatherData.dt);
-
   const isDayTime = (sunrise, sunset, currentTime) => {
     return currentTime >= sunrise && currentTime < sunset;
   };
+
+  const { weekday, dateStr } = formatDate(weatherData.dt);
+  const time = formatTime(weatherData.dt);
 
   const dayTimeIcon = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt) ? (
     <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
@@ -47,6 +63,10 @@ function WeatherDisplay({ weatherData }) {
   const dayTimeText = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt)
     ? 'Day'
     : 'Night';
+
+  // Require the images dynamically based on the background and icon states
+  const backgroundImage = require(`../images/backgrounds/${background}.svg`);
+  const weatherSymbol = require(`../images/symbols/${icon}.svg`);
 
   return (
     <Box
@@ -88,7 +108,6 @@ function WeatherDisplay({ weatherData }) {
         </Box>
       </Box>
 
-      {/* Bottom section for temperature */}
       <Box
         sx={{
           position: 'absolute',
@@ -106,21 +125,15 @@ function WeatherDisplay({ weatherData }) {
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1.5 }}>
           <Typography variant='h1' component='div' sx={{ fontSize: '3rem' }}>
-            {' '}
-            {/* Increased font size */}
             {weatherData.main.temp.toFixed(1)}°C
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {dayTimeIcon}
             <Typography variant='subtitle1' sx={{ ml: 1, fontSize: '1.25rem' }}>
-              {' '}
-              {/* Increased font size */}
               {dayTimeText}
             </Typography>
             <FiberManualRecordIcon fontSize='small' sx={{ fontSize: '0.5rem', mx: 1 }} />
             <Typography variant='body1' sx={{ fontSize: '1.25rem' }}>
-              {' '}
-              {/* Increased font size */}
               {weatherData.main.temp_min.toFixed(1)}°C / {weatherData.main.temp_max.toFixed(1)}°C
             </Typography>
           </Box>
