@@ -45,19 +45,11 @@ export const lightTheme = createTheme({
     fontFamily: 'Space Grotesk, monospace',
     h1: {
       fontSize: '2.2rem',
-      color: '#5c6bc0', // A pastel indigo for h1 headers
+      color: '#8FB2F5', // blue-light for h1 headers
     },
     h2: {
       fontSize: '1.8rem',
-      color: '#9fa8da', // A lighter shade of pastel indigo for h2 headers
+      color: '#7F7F98', // gray-400 for h2 headers
     },
-    // paragraph styles
-    body1: {
-      color: '#333333', // Dark gray for body text
-    },
-    body2: {
-      color: '#333333', // Dark gray for secondary body text
-    },
-    // Other text variants as needed
   },
 });
