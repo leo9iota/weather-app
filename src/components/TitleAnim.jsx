@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+/* import { useEffect } from "react";
 
 function TitleAnim() {
   useEffect(() => {
@@ -30,3 +30,4 @@ function TitleAnim() {
 }
 
 export default TitleAnim;
+ */
