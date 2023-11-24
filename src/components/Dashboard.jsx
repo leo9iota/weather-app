@@ -45,7 +45,7 @@ function Dashboard() {
   return (
     <>
       <NavBar />
-      <Box sx={{ mt: 2, mx: 'auto', maxWidth: 1280 }}>
+      <Box sx={{ mt: 2, mx: 'auto', maxWidth: 'lg' }}>
         <Grid container spacing={2}>
           {/* Search Bar and Weather Display */}
           <Grid item xs={12} md={7} lg={8}>
