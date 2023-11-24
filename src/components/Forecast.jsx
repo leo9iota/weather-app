@@ -51,7 +51,7 @@ function Forecast({ forecastData, weatherData }) {
             <SwiperSlide key={index}>
               <Grid container spacing={2} sx={{ padding: 2 }}>
                 <Grid item xs={12}>
-                  <Typography variant='body1' sx={{ fontWeight: 'bold', userSelect: 'none' }}>
+                  <Typography variant='body1' sx={{ fontWeight: '', userSelect: 'none' }}>
                     {new Date(item.dt * 1000).toLocaleTimeString()}
                   </Typography>
                 </Grid>
