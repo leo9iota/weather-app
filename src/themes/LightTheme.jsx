@@ -1,5 +1,7 @@
 import { createTheme } from '@mui/material';
 
+const borderRadiusValue = '8px';
+
 export const lightTheme = createTheme({
   components: {
     MuiCssBaseline: {
@@ -13,7 +15,15 @@ export const lightTheme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: 'none',
-          border: '1px solid rgba(0, 0, 0, 0.12)',
+          border: '1px solid rgba(77, 77, 77, 0.12)',
+          borderRadius: borderRadiusValue,
+        },
+      },
+    },
+    MuiImage: {
+      styleOverrides: {
+        root: {
+          borderRadius: borderRadiusValue,
         },
       },
     },
