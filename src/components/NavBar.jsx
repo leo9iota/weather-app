@@ -27,7 +27,7 @@ function NavBar() {
     setDrawer(open);
   };
 
-  const menuItems = ['Home', 'Pricing', 'About'];
+  const menuItems = ['Home', 'Locations', 'Account'];
   const isDarkTheme = currentTheme === 'dark';
 
   return (
