@@ -128,14 +128,17 @@ function WeatherDisplay({ weatherData }) {
         <Box
           sx={{
             position: 'absolute',
-            bottom: -70, // Aligning to the bottom
-            right: -70, // Aligning to the right
-            height: '350px', // Adjust size accordingly
+            bottom: -70,
+            right: -70,
+            height: '350px',
             width: 'auto',
-            transform: 'translate(0, 0)', // Resetting any translations
+            transform: 'translate(0, 0)',
+            userSelect: 'none',
+            pointerEvents: 'none',
           }}
           component='img'
           src={weatherSymbol}
+          draggable='false'
         />
       </Box>
     </Box>
