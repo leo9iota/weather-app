@@ -39,7 +39,7 @@ function Overview({ weatherData }) {
           <Grid item xs={12} container>
             <Grid item xs={6} container alignItems='center'>
               <ThermostatIcon sx={{ color: iconColor }} />
-              <Typography variant='body1' sx={{ ml: 1 }}>
+              <Typography variant='body1' sx={{ ml: 1, fontWeight: 'bold' }}>
                 Feels Like
               </Typography>
             </Grid>
@@ -53,7 +53,7 @@ function Overview({ weatherData }) {
           <Grid item xs={12} container>
             <Grid item xs={6} container alignItems='center'>
               <OpacityIcon sx={{ color: iconColor }} />
-              <Typography variant='body1' sx={{ ml: 1 }}>
+              <Typography variant='body1' sx={{ ml: 1, fontWeight: 'bold' }}>
                 Humidity
               </Typography>
             </Grid>
@@ -67,7 +67,7 @@ function Overview({ weatherData }) {
           <Grid item xs={12} container>
             <Grid item xs={6} container alignItems='center'>
               <AirIcon sx={{ color: iconColor }} />
-              <Typography variant='body1' sx={{ ml: 1 }}>
+              <Typography variant='body1' sx={{ ml: 1, fontWeight: 'bold' }}>
                 Wind Speed
               </Typography>
             </Grid>
@@ -81,7 +81,7 @@ function Overview({ weatherData }) {
           <Grid item xs={12} container>
             <Grid item xs={6} container alignItems='center'>
               <Brightness5Icon sx={{ color: iconColor }} />
-              <Typography variant='body1' sx={{ ml: 1 }}>
+              <Typography variant='body1' sx={{ ml: 1, fontWeight: 'bold' }}>
                 Sunrise
               </Typography>
             </Grid>
@@ -95,7 +95,7 @@ function Overview({ weatherData }) {
           <Grid item xs={12} container>
             <Grid item xs={6} container alignItems='center'>
               <Brightness4Icon sx={{ color: iconColor }} />
-              <Typography variant='body1' sx={{ ml: 1 }}>
+              <Typography variant='body1' sx={{ ml: 1, fontWeight: 'bold' }}>
                 Sunset
               </Typography>
             </Grid>
