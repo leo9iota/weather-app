@@ -141,9 +141,9 @@ function WeatherDisplay({ weatherData }) {
         <Box
           sx={{
             position: 'absolute',
-            bottom: -70,
-            right: -70,
-            height: '350px',
+            bottom: 0,
+            right: -15,
+            height: '250px',
             width: 'auto',
             transform: 'translate(0, 0)',
             userSelect: 'none',
