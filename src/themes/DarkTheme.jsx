@@ -43,7 +43,7 @@ export const darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Fredoka, sans-serif',
+    fontFamily: 'Space Grotesk, monospace',
     h1: {
       fontSize: '2.2rem',
       color: '#8FB2F5', // blue-light for h1 headers
