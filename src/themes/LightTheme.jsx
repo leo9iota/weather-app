@@ -42,7 +42,7 @@ export const lightTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+    fontFamily: 'Fredoka, sans-serif',
     h1: {
       fontSize: '2.2rem',
       color: '#5c6bc0', // A pastel indigo for h1 headers
