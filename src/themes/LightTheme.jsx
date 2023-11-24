@@ -9,6 +9,17 @@ export const lightTheme = createTheme({
         }
       `,
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          border: '1px solid rgba(0, 0, 0, 0.12)',
+        },
+      },
+    },
+    shape: {
+      borderRadius: 8,
+    },
   },
   palette: {
     mode: 'light',

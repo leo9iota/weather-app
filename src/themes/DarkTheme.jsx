@@ -1,5 +1,7 @@
 // DarkTheme.jsx
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
+
+const borderRadiusValue = '8px';
 
 export const darkTheme = createTheme({
   components: {
@@ -9,6 +11,25 @@ export const darkTheme = createTheme({
           user-select: none;
         }
       `,
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          border: '1px solid rgba(204, 204, 204, 0.12)',
+          borderRadius: borderRadiusValue,
+        },
+      },
+    },
+    MuiImage: {
+      styleOverrides: {
+        root: {
+          borderRadius: borderRadiusValue,
+        },
+      },
+    },
+    shape: {
+      borderRadius: 8,
     },
   },
   palette: {
