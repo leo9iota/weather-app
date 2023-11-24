@@ -10,22 +10,21 @@ import {
   ListItemText,
   Box,
   Hidden,
-  Container, // Import Container
+  Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ThemeToggle from './ThemeToggle';
 import { useThemeContext } from './ThemeContext';
 
 function NavBar() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setDrawer] = useState(false);
   const { currentTheme } = useThemeContext();
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
-    setIsDrawerOpen(open);
+    setDrawer(open);
   };
 
   const menuItems = ['Home', 'Pricing', 'About'];
@@ -42,8 +41,8 @@ function NavBar() {
           color: isDarkTheme ? 'white' : 'black',
         }}
       >
-        <Container>
-          {/* This Container aligns the content */}
+        {/* Adjust the maxWidth to match the width of your content and add horizontal padding */}
+        <Container maxWidth='lg' sx={{ paddingX: 2 }}>
           <Toolbar sx={{ justifyContent: 'space-between', minHeight: 56 }}>
             <Hidden mdUp>
               <IconButton
