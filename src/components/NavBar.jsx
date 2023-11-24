@@ -39,6 +39,11 @@ function NavBar() {
           backgroundColor: isDarkTheme ? 'rgba(22, 22, 31, 0.6)' : 'rgba(255, 255, 255, 0.6)',
           boxShadow: 'none',
           color: isDarkTheme ? 'white' : 'black',
+          borderRadius: '0',
+          borderTop: 'none',
+          borderBottom: '1px solid rgba(204, 204, 204, 0.12)',
+          borderLeft: 'none',
+          borderRight: 'none',
         }}
       >
         {/* Adjust the maxWidth to match the width of your content and add horizontal padding */}
