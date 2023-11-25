@@ -29,5 +29,9 @@ npm start
 
 ## 📈 Progress
 
-![Weather App V1](./src/images/progress/weather-app-v1.png)
+### 🖥️ Desktop View
+![Weather App Desktop View V2](./src/images/progress/weather-app-desktop-view-v2.png)
+
+### 📱 Mobile View
+![Weather App Mobile View V2](./src/images/progress/weather-app-mobile-view-v2.png)
 
