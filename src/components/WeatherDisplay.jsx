@@ -5,6 +5,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import moment from 'moment-timezone';
 
 // Import your mappings from the weatherMapping.js file
 import { backgroundImages, weatherSymbols } from './weatherMappings';
@@ -28,31 +29,28 @@ function WeatherDisplay({ weatherData }) {
   }, [weatherData]);
 
   const formatDate = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
-    const dateStr = date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    // Convert to the local time zone first
+    const localTime = moment.unix(timestamp).tz(moment.tz.guess());
+    const weekday = localTime.format('dddd');
+    const dateStr = localTime.format('MMMM D, YYYY');
     return { weekday, dateStr };
   };
 
-  const formatTime = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    });
+  const formatTime = (timezoneOffset) => {
+    // Convert the current UTC time to the city's local time using the timezone offset.
+    const cityTime = moment.utc().add(timezoneOffset, 'seconds');
+    return cityTime.format('HH:mm'); // 24-hour format
   };
 
   const isDayTime = (sunrise, sunset, currentTime) => {
-    return currentTime >= sunrise && currentTime < sunset;
+    const current = moment.unix(currentTime);
+    const sunriseTime = moment.unix(sunrise);
+    const sunsetTime = moment.unix(sunset);
+    return current.isBetween(sunriseTime, sunsetTime);
   };
 
   const { weekday, dateStr } = formatDate(weatherData.dt);
-  const time = formatTime(weatherData.dt);
+  const time = formatTime(weatherData.timezone);
 
   const dayTimeIcon = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt) ? (
     <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
