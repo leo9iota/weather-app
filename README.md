@@ -34,4 +34,3 @@ npm start
 
 ### 📱 Mobile View
 ![Weather App Mobile View V2](./src/images/progress/weather-app-mobile-view-v2.png)
-
