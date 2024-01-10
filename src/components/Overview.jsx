@@ -6,7 +6,7 @@ import AirIcon from '@mui/icons-material/Air'; // For wind speed
 import Brightness5Icon from '@mui/icons-material/Brightness5'; // For sunrise
 import Brightness4Icon from '@mui/icons-material/Brightness4'; // For sunset
 
-function Overview({ weatherData }) {
+const Overview = ({ weatherData }) => {
   const theme = useTheme(); // Accessing the theme
 
   // Function to format the timestamp into a readable time

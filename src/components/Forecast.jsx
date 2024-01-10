@@ -7,7 +7,7 @@ import 'swiper/css';
 import { weatherSymbols } from './weatherMappings'; // Import your mappings
 import { useThemeContext } from './ThemeContext'; // Import the ThemeContext hook
 
-function Forecast({ forecastData, weatherData }) {
+const Forecast = ({ forecastData, weatherData }) => {
   const swiperRef = useRef(null);
   const [weatherIcons, setWeatherIcons] = useState([]);
   const { currentTheme } = useThemeContext(); // Use the theme context

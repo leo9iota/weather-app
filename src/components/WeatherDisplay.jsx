@@ -10,7 +10,7 @@ import moment from 'moment-timezone';
 // Import your mappings from the weatherMapping.js file
 import { backgroundImages, weatherSymbols } from './weatherMappings';
 
-function WeatherDisplay({ weatherData }) {
+const WeatherDisplay = ({ weatherData }) => {
   const theme = useTheme();
 
   // States for background and icon

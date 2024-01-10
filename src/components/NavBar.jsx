@@ -16,7 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ThemeToggle from './ThemeToggle';
 import { useThemeContext } from './ThemeContext';
 
-function NavBar() {
+const NavBar = () => {
   const [isDrawerOpen, setDrawer] = useState(false);
   const { currentTheme } = useThemeContext();
 

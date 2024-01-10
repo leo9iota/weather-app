@@ -3,7 +3,7 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProviderWrapper } from './ThemeContext';
 import Dashboard from './Dashboard';
 
-function App() {
+const App = () => {
   return (
     <ThemeProviderWrapper>
       <CssBaseline />

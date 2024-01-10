@@ -8,7 +8,7 @@ import WeatherDisplay from './WeatherDisplay';
 import Overview from './Overview';
 import Forecast from './Forecast';
 
-function Dashboard() {
+const Dashboard = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [city, setCity] = useState('');

@@ -3,7 +3,7 @@ import React from 'react';
 import { Paper, InputBase, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-function SearchBar({ city, onCityChange, onSearch }) {
+const SearchBar = ({ city, onCityChange, onSearch }) => {
   return (
     <Paper
       component='form'
