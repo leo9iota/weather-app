@@ -52,7 +52,7 @@ const Dashboard = () => {
                 height: '100%',
                 padding: 2,
                 mx: 2,
-                mr: { xs: 2, md: 0 }, // Apply right margin on xs and remove on md
+                mr: { xs: 2, md: 0 },
               }}
             >
               <SearchBar
@@ -71,7 +71,7 @@ const Dashboard = () => {
               sx={{
                 padding: 0,
                 mx: 2,
-                ml: { xs: 2, md: 0 }, // Apply left margin on xs and remove on md
+                ml: { xs: 2, md: 0 },
               }}
             >
               {weatherData !== null && <Overview weatherData={weatherData} />}
@@ -89,6 +89,6 @@ const Dashboard = () => {
       <Box sx={{ height: '500px' }}></Box> {/* Bottom spacing */}
     </>
   );
-}
+};
 
 export default Dashboard;
