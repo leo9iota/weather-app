@@ -8,29 +8,27 @@ import WeatherDisplay from './WeatherDisplay';
 import Overview from './Overview';
 import Forecast from './Forecast';
 
-const Dashboard = () => {
+function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
   const [city, setCity] = useState('');
 
   // Access the API key safely through environment variables
-  const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+  const apiKey = '9308bf1b53ae61108fe9c912a6e647d5';
 
-  // Function to handle the search action
   const handleSearch = () => {
-    // Fetch general weather data
-    axios
-      .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-      .then((response) => {
-        setWeatherData(response.data);
+    // Prepare the URLs for the API calls
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const forecastUrl = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}&units=metric`;
 
-        // Fetch forecast data
-        return axios.get(
-          `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}&units=metric`
-        );
-      })
-      .then((response) => {
-        setForecastData(response.data);
+    // Make both API calls in parallel
+    Promise.all([axios.get(weatherUrl), axios.get(forecastUrl)])
+      .then((responses) => {
+        // The first response is from the general weather data
+        setWeatherData(responses[0].data);
+
+        // The second response is from the forecast data
+        setForecastData(responses[1].data);
       })
       .catch((error) => {
         console.error('Error fetching data', error);
@@ -76,7 +74,7 @@ const Dashboard = () => {
                 ml: { xs: 2, md: 0 }, // Apply left margin on xs and remove on md
               }}
             >
-              <Overview weatherData={weatherData} />
+              {weatherData !== null && <Overview weatherData={weatherData} />}
             </Paper>
           </Grid>
 
