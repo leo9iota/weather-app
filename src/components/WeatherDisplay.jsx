@@ -6,20 +6,20 @@ import NightsStayIcon from '@mui/icons-material/NightsStay';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment-timezone';
-
-// Import your mappings from the weatherMapping.js file
 import { backgroundImages, weatherSymbols } from './weatherMappings';
 
-const WeatherDisplay = ({ weatherData }) => {
-  const theme = useTheme();
-
+function WeatherDisplay({ weatherData }) {
   // States for background and icon
   const [background, setBackground] = useState('default');
   const [icon, setIcon] = useState('default');
 
-  // Effect hook to update the state when weatherData changes
+  // States for dynamically loaded images
+  const [backgroundImagePath, setBackgroundImagePath] = useState(null);
+  const [weatherSymbolPath, setWeatherSymbolPath] = useState(null);
+
+  // Effect hook to update the background state when weatherData changes
   useEffect(() => {
-    const weatherIconCode = weatherData?.weather?.[0]?.icon; // Safely access the icon code
+    const weatherIconCode = weatherData?.weather?.[0]?.icon;
     if (weatherIconCode) {
       const newBackground = backgroundImages[weatherIconCode] || backgroundImages.default;
       const newIcon = weatherSymbols[weatherIconCode] || weatherSymbols.default;
@@ -28,20 +28,40 @@ const WeatherDisplay = ({ weatherData }) => {
     }
   }, [weatherData]);
 
+  // Dynamic imports for images based on the state
+  useEffect(() => {
+    // Dynamic import for the background image
+    if (background) {
+      import(`../images/backgrounds/${background}.svg`)
+        .then((module) => setBackgroundImagePath(module.default))
+        .catch((error) => console.error(`Failed to load background image: ${error}`));
+    }
+  }, [background]);
+
+  useEffect(() => {
+    // Dynamic import for the weather symbol
+    if (icon) {
+      import(`../images/symbols/${icon}.svg`)
+        .then((module) => setWeatherSymbolPath(module.default))
+        .catch((error) => console.error(`Failed to load weather symbol: ${error}`));
+    }
+  }, [icon]);
+
+  // Function to format date
   const formatDate = (timestamp) => {
-    // Convert to the local time zone first
     const localTime = moment.unix(timestamp).tz(moment.tz.guess());
     const weekday = localTime.format('dddd');
     const dateStr = localTime.format('MMMM D, YYYY');
     return { weekday, dateStr };
   };
 
+  // Function to format time
   const formatTime = (timezoneOffset) => {
-    // Convert the current UTC time to the city's local time using the timezone offset.
     const cityTime = moment.utc().add(timezoneOffset, 'seconds');
-    return cityTime.format('HH:mm'); // 24-hour format
+    return cityTime.format('HH:mm');
   };
 
+  // Function to determine if it's day time
   const isDayTime = (sunrise, sunset, currentTime) => {
     const current = moment.unix(currentTime);
     const sunriseTime = moment.unix(sunrise);
@@ -49,9 +69,12 @@ const WeatherDisplay = ({ weatherData }) => {
     return current.isBetween(sunriseTime, sunsetTime);
   };
 
+  // Extracted date and time information using formatDate and formatTime functions
   const { weekday, dateStr } = formatDate(weatherData.dt);
   const time = formatTime(weatherData.timezone);
+  const theme = useTheme();
 
+  // Determining if it's day or night to set the appropriate icon
   const dayTimeIcon = isDayTime(weatherData.sys.sunrise, weatherData.sys.sunset, weatherData.dt) ? (
     <WbSunnyIcon style={{ color: theme.palette.warning.main }} />
   ) : (
@@ -62,10 +85,6 @@ const WeatherDisplay = ({ weatherData }) => {
     ? 'Day'
     : 'Night';
 
-  // Require the images dynamically based on the background and icon states
-  const backgroundImage = require(`../images/backgrounds/${background}.svg`);
-  const weatherSymbol = require(`../images/symbols/${icon}.svg`);
-
   return (
     <Paper elevation={3} sx={{ overflow: 'hidden' }}>
       <Box
@@ -74,7 +93,7 @@ const WeatherDisplay = ({ weatherData }) => {
           flexDirection: 'column',
           justifyContent: 'space-between',
           minHeight: '319px',
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${backgroundImagePath})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -148,7 +167,7 @@ const WeatherDisplay = ({ weatherData }) => {
               pointerEvents: 'none',
             }}
             component='img'
-            src={weatherSymbol}
+            src={weatherSymbolPath}
             draggable='false'
           />
         </Box>
