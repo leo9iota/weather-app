@@ -7,7 +7,7 @@ import { weatherSymbols } from './weatherMappings';
 import { useThemeContext } from './ThemeContext';
 import 'swiper/css';
 
-function Forecast({ forecastData, weatherData }) {
+const Forecast = ({ forecastData, weatherData }) => {
   // Reference for the swiper component to control its behavior programmatically
   const swiperRef = useRef(null);
 
