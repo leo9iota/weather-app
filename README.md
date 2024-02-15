@@ -1,36 +1,30 @@
-# 🌤️ Weather App
+# React + TypeScript + Vite
 
-Weather app made with React and the OpenWeatherMap API that shows the current weather of your city with an hourly forecast.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🛠️ Tech Stack
+Currently, two official plugins are available:
 
-<div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" title="React" alt="React" width="50" height="50"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg" title="Material UI" alt="Material UI" width="50" height="50"/>&nbsp;
-</div>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🚀 Dependencies
+## Expanding the ESLint configuration
 
-![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&style=for-the-badge)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## 🏗️ Setup
+- Configure the top-level `parserOptions` property like this:
 
-1. Install dependencies
-
-```sh
-npm i
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
 ```
 
-2. Run the Weather App
-
-```sh
-npm start
-```
-
-## 📈 Progress
-
-### 🖥️ Desktop View
-![Weather App Desktop View V2](./src/images/progress/weather-app-desktop-view-v2.png)
-
-### 📱 Mobile View
-![Weather App Mobile View V2](./src/images/progress/weather-app-mobile-view-v2.png)
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
