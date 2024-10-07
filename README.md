@@ -4,14 +4,12 @@ Weather app made with React and the OpenWeatherMap API that shows the current we
 
 ## 🛠️ Tech Stack
 
-<div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" title="React" alt="React" width="50" height="50"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/materialui/materialui-original.svg" title="Material UI" alt="Material UI" width="50" height="50"/>&nbsp;
-</div>
+![Tech Stack](https://skillicons.dev/icons?i=ts,react,mui,vite)
 
 ## 🚀 Dependencies
 
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&style=for-the-badge)
+![Swiper](https://img.shields.io/badge/Swiper-6332F6?logo=swiper&style=for-the-badge)
 
 ## 🏗️ Setup
 
@@ -34,3 +32,4 @@ npm start
 
 ### 📱 Mobile View
 ![Weather App Mobile View V2](./src/images/progress/weather-app-mobile-view-v2.png)
+
