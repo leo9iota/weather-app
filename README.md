@@ -4,7 +4,7 @@ Weather app...
 
 ## 🛠️ Tech Stack
 
-![Tech Stack](https://skillicons.dev/icons?i=ts,react,vite)
+![Tech Stack](https://skillicons.dev/icons?i=ts,react,bun,vite)
 
 ## 🚀 Dependencies
 
