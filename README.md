@@ -12,3 +12,9 @@ Weather app...
 - [Vanilla Extract](https://vanilla-extract.style/)
 
 ## 🏗️ Setup
+
+## Images
+
+![Weather App Desktop View](./assets/images/weather-app-desktop-view-v2.png)
+
+![Weather App Mobile View](./assets/images/weather-app-mobile-view-v2.png)
