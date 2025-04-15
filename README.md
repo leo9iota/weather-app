@@ -13,7 +13,7 @@ Weather app...
 
 ## 🏗️ Setup
 
-## Images
+## 🖼️ Images
 
 ![Weather App Desktop View](./assets/images/weather-app-desktop-view-v2.png)
 
